@@ -71,7 +71,7 @@ public class FrontController extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage); // 내가 가지고 있는 request 객체를 가지고 새로운 페이지로 넘어간다
 		dispatcher.forward(request, response);
-		// 영서가 재호 심부름만 보내는 게 아니라 물티슈도 주면서 갖다주라고 하는 거임 !! 기억 !!
+		// a가 b 심부름만 보내는 게 아니라 물티슈도 주면서 갖다주라고 하는 거임 !! 기억 !!
 	}
 
 }
