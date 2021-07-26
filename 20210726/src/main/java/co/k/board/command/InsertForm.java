@@ -9,7 +9,6 @@ public class InsertForm implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO 게시글 작성폼 호출
 		
-		
 		return "board/insertForm";
 	}
 

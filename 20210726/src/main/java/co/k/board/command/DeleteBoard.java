@@ -14,8 +14,16 @@ public class DeleteBoard implements Command {
 		// TODO 게시글 삭제
 		BoardService dao = new BoardServiceImpl();
 		BoardVO vo = new BoardVO();
+		vo.setbId(Integer.valueOf(request.getParameter("bId")));
+		
+		int n = dao.boardDelete(vo);
 		
 		String page = "";
+		if(n != 0) {
+			page = "boardList.do";
+		} else {
+			page = "board/boardErrorPage";
+		}
 		return page;
 	}
 

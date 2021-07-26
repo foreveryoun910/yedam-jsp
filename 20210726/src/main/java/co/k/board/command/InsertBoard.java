@@ -27,7 +27,7 @@ public class InsertBoard implements Command {
 		if(n != 0) {
 			page = "boardList.do";
 		} else {
-			page = "board/boardInsertFail";
+			page = "board/boardErrorPage";
 		}
 		return page;
 	}

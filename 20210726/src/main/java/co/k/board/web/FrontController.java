@@ -18,6 +18,7 @@ import co.k.board.command.DeleteBoard;
 import co.k.board.command.HomeCommand;
 import co.k.board.command.InsertBoard;
 import co.k.board.command.InsertForm;
+import co.k.board.command.UpdateBoard;
 import co.k.board.command.UpdateForm;
 
 @WebServlet("*.do") // 어노테이션을 활용해 servlet mapping 해주는 방법
@@ -37,7 +38,8 @@ public class FrontController extends HttpServlet {
 		map.put("/insertForm.do", new InsertForm()); // 게시글 입력폼
 		map.put("/insertBoard.do", new InsertBoard()); // 게시글 입력
 		map.put("/deleteBoard.do", new DeleteBoard()); // 게시글 삭제
-		map.put("/updateForm.do", new UpdateForm()); // 게시글 수정
+		map.put("/updateForm.do", new UpdateForm()); // 게시글 수정폼
+		map.put("/updateBoard.do", new UpdateBoard()); // 게시글 수정
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
