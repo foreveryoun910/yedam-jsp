@@ -5,6 +5,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>공지 상세 보기</title>
+	<script type="text/javascript">
+		function getPath(n) {
+			if(n == 1) {
+				getPath = "updateForm.do";
+			} else {
+				getPath = "deleteBoard.do";
+			}
+			frm.submit();
+		}
+	</script>
 </head>
 <body>
 	<div align="center">
@@ -36,9 +46,12 @@
 		</div><br>
 		<div>
 			<button type="button" onclick="location.href='boardList.do'">목록</button>&nbsp;&nbsp;&nbsp;
-			<button type="submit" onclick="location.href='updateForm.do?bId=${board.bId}'">수정</button>&nbsp;&nbsp;&nbsp;
-			<button type="submit" onclick="location.href='deleteBoard.do?bId=${board.bId}'">삭제</button>
+			<button type="button" onclick="getPath(1)">수정</button>&nbsp;&nbsp;&nbsp;
+			<button type="button" onclick="getPath(2)">삭제</button>
 		</div>
+		<form id="frm" name="frm" action="" method="post">
+			<input type="hidden" id="bId" name="bId" value="${ board.bId }">
+		</form>
 	</div>
 </body>
 </html>
