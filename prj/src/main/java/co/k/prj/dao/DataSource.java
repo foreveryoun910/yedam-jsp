@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DataSource {
+public class DataSource { // DAO
 	private static DataSource dataSource = new DataSource(); // 싱글톤 클래스 생성
 	private Connection conn;
 	private String driver;
