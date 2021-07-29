@@ -17,7 +17,7 @@ public class DataSource {
 
 	private DataSource() {} // 생성자, 외부에서 생성하지 못하도록 private로 생성자 생성해둠
 	
-	public static DataSource getInstance() { // 외부에서는 getInstance를 통해서만 사용 가능
+	public static DataSource getInstance() { // 외부에서는 getInstance를 통해서만 사용 가능, 외부에서 사용시 리턴
 		return dataSource;
 	}
 	
