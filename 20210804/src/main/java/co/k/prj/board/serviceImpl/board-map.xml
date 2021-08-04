@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.k.prj.board.service.BoardMapper">
+	<!-- 미구현 된 SQL을 적용해준다. -->
+	<!-- id는 service, serviceImpl, mapper에 써준 이름과 똑같이 써야 한다. -->
+	
+	<select id="snsSelectList" resultType="SnsVO">
+		select * from sns
+	</select>
+	
+	<!-- 
+	<select id="snsSelect" resultType="co.k.prj.board.vo.SnsVO">
+		select a.*, b.cno, b.cname, b.csubject, b.cdate 
+		from sns a left outer join comments b on (a.sno = b.sno) where a.sno = #{sNo}
+	</select>
+	 -->
+	
+	<!-- SQL 쿼리 작성할 때 별칭을 사용하려면 resultMap을 설정해줘야 한다. -->
+	
+	<resultMap type="SnsVO" id="SnsVOMap"> <!-- 별칭은 임의로 정해준다. -->
+		<id property="sNo" column="sNo"/>
+		<result property="cNo" column="kk"/>
+		<result property="cSubject" column="bb"/>
+	</resultMap>
+	
+	<select id="snsSelect" resultMap="SnsVOMap">
+		select a.*, b.cno as kk, b.cname, b.csubject as bb, b.cdate 
+		from sns a left outer join comments b on (a.sno = b.sno) where a.sno = #{sNo}
+	</select>	
+	
+	<select id="commentsSelect" resultType="CommentsVO">
+		select * from comments where cno = #{cNo}
+	</select>
+	
+	<insert id="snsInsert" parameterType="SnsVO">
+		insert into sns(sno, swriter, sdate, stitle, scontents, sano) 
+		values(s_seq.nextval, #{sWriter}, sysdate, #{sTitle}, #{sContents}, #{sAno})
+	</insert>
+	
+</mapper>

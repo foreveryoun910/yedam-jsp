@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 방법2 -->
+<configuration>
+	<properties resource="/db.properties">
+	</properties>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${user}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 매퍼로 패키지내 모든 인터페이스를 등록 -->
+	<!-- 어노테이션(@)으로 넘겨주는 단순 쿼리(조건 없는)만 적용되는 듯? -->
+	<mappers>
+	  <package name="co.k.prj"/>
+	</mappers>
+</configuration>
