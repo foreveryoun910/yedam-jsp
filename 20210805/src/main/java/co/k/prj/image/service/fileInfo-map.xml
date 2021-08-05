@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.k.prj.image.service.FileInfoMapper">
+	
+	<select id="fileSelectList" resultType="co.k.prj.image.vo.FileInfoVO">
+		select * from fileinformation order by num desc
+	</select>
+	
+	<select id="fileSelect" resultType="co.k.prj.image.vo.FileInfoVO">
+		select * from fileinformation where num = #{key}
+	</select>
+	
+	<insert id="fileInsert">
+		insert into fileinformation values(f_seq.nextval, #{subject}, #{fileName}, #{downFile})
+	</insert>
+	
+	<update id="fileUpdate"> <!-- 동적으로 처리해보자. -->
+		
+	</update>
+	
+	<delete id="fileDelete">
+		delete from fileinformation	where num = #{key}
+	</delete>
+</mapper>
