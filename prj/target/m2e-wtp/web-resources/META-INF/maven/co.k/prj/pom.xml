@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>co.k</groupId>
+	<artifactId>prj</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties> <!-- 사용할 내부변수를 설정한다. 이용시 el표현 형태로 이용 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>11</java.version>
+		<!-- 원래 있던 애들 안 지우고 java.version 추가만 해도 된다. -->
+	</properties> <!-- 사용할 내부변수를 설정한다. 이용시 el표현 형태로 이용 -->
+
+	<dependencies> <!-- 사용할 라이브러리 의존성을 주입하는 곳 -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc8 -->
+		<dependency>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<version>19.3.0.0</version>
+		</dependency>
+	</dependencies> <!-- 사용할 라이브러리 의존성을 주입하는 곳 -->
+
+	<build> <!-- 배포시 사용되거나 컴파일시 java(jvm)에게 정보제공 -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory> <!-- 이 디렉토리에서 리소스를 들고 오라는 뜻 -->
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<release>${java.version}</release>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+			</plugin>
+		</plugins>
+	</build> <!-- 배포시 사용되거나 컴파일시 java(jvm)에게 정보제공 -->
+</project>
