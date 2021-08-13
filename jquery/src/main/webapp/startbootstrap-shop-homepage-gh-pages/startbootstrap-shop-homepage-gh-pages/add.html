@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	// $(document).ready() <<< 해당 document를 쭉 다 파악하고(처리하고) 로딩이 되면 실행한다 -> 순서 제일 마지막
+	// 아 그래서 입력 다 끝나고 목록을 뿌려주는 거니까 바로바로 반영이 되는 거구나!
+	$(document).ready(function(){
+		// 행 삭제
+
+		
+		// 전체 데이터 출력
+		$.ajax({
+			url: '../../ItemListServlet.do',
+			dataType: 'json',
+			success: itemListFnc,
+			error: function(){}
+		});
+		
+		// 폼전송 버튼 누르면 실행할 이벤트, 기능 정의
+		$('#frm').on('submit', function(event){
+			event.preventDefault(); // 이벤트 일어나도 안 넘어가게 만드는 듯?
+			console.log('submit');
+			let s = $('#frm').serialize();
+			console.log(s);
+			
+			// 폼전송처리
+			$.ajax({
+				url: $('#frm').attr('action'), // ../../AddItemServlet.do
+				method: 'post',
+				data: $('#frm').serialize(),
+				/*
+				{
+					itemNo: $('input[name="itemNo"]').val(),
+					itemName: $('input[name="itemName"]').val(),
+					itemDesc: $('input[name="itemDesc"]').val(),
+					likeIt: $('input[name="likeIt"]').val(),
+					price: $('input[name="price"]').val(),
+					priceOff: $('input[name="priceOff"]').val(),
+					image: $('input[name="image"]').val()
+				}, */
+				dataType: 'json',
+				success: addItemFnc,
+				error: function(reject){
+					console.error(reject);
+				}
+			});
+		})
+	});
+	
+		let fields = ['itemNo', 'itemName', 'likeIt', 'price']; // new Array
+		// 리스트조회 후 콜백함수
+		function itemListFnc(data){
+			let table = $('<table />').attr('border', '1'); // table은 반복 필요 없으니까 반복문 밖에
+			$(table).append($('<tr />').append('<th>ItemNo</th><th>ItemName</th><th>LikeIt</th><th>Price</th><th>del</th>'));
+			for(let i=0; i<data.length; i++){
+				let tr = $('<tr />');
+				for(let field of fields){
+					let td = $('<td />').text(data[i][field]); // <td>c003</td> <td>커피이름</td> 이런 식으로 출력될 것
+					$(tr).append(td);
+				}
+					let delBtn = $('<td />').append('<button type="button" id="delBtn">Del</button>');
+					$(tr).append(delBtn);
+					$('#delBtn').on('click', function(){
+						$(this).parent().parent().remove();
+					});
+				$(table).append(tr);
+			}
+			$('#show').append(table);
+		}
+		
+		// 입력처리 후 콜백함수
+		function addItemFnc(data){ // data라는 변수에 어떤 값이 들어있냐면 {itemNo: ?, itemName: ?, ...}
+			let tr = $('<tr />');
+			for(let field of fields){
+				let td = $('<td />').text(data[field]); // <td>c003</td> <td>커피이름</td> 이런 식으로 출력될 것
+				$(tr).append(td);
+			}
+			$('table').append(tr); // 테이블이 여러개라면 $('table').eq(0).append(tr);
+		}
+		
+		
+</script>
+<!-- 메소드의 매개값으로 함수가 들어가면: 콜백함수 -->
+</head>
+<body>
+<div align="center">
+   <form id="frm" action="../../AddItemServlet.do" method="post">
+      ItemNo : <input type="text" name ="itemNo" value="c011"> <br>
+      ItemName : <input type="text" name ="itemName" value="이디야커피"> <br>
+      ItemDesc : <input type="text" name ="itemDesc" value="이디야커피 맛있습니당!"> <br>
+      LikeIt : <input type="text" name ="likeIt" value="4.0"> <br>
+      Price : <input type="text" name ="price" value="3000"> <br>
+      PriceOff : <input type="text" name ="priceOff" value="2500"> <br>
+      image : <input type="file" name ="image"> <br>
+      <br>
+      <input type="submit" value="저장">&nbsp;&nbsp;&nbsp;<input type="reset" value="취소">
+   </form>
+   
+   <h3>상품리스트</h3>
+   <div id="show">
+   </div>
+</div>
+</body>
+</html>
