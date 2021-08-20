@@ -18,7 +18,7 @@
 			// 폼전송처리
 			$.ajax({
 				url: $('#frm').attr('action'),
-				method: 'post',
+				method: 'post',.
 				data: $('#frm').serialize(),
 				dataType: 'json',
 				success: reviewInsertFnc,
